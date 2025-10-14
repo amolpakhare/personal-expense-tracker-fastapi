@@ -1,0 +1,46 @@
+# Python-specific
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyw
+
+# Virtual environment
+.venv/
+venv/
+.env/
+env/
+
+# Dependency directories and files
+*.egg-info/
+dist/
+build/
+*.egg
+
+# IDE/Editor specific
+.vscode/
+.idea/
+*.vs/
+*.sublime-project
+*.sublime-workspace
+
+# Logs and temporary files
+*.log
+*.swp
+*.swo
+
+# Runtime files
+*.pid
+*.coverage
+
+# System and environment specific
+.DS_Store
+Thumbs.db
+
+# Docker specific
+.dockerignore
+
+# Ignore files generated at runtime or build
+# Add more specific files or folders as needed
+
+*.env
