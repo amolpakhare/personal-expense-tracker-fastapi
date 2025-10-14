@@ -28,3 +28,4 @@ def delete_user(data : DeleteUserSchemaByUserID,db:Session = Depends(get_db)):
 @user_router.get("/all")
 def all_users(db:Session = Depends(get_db)):
     return get_all_users(db)
+

@@ -21,7 +21,7 @@ def create_register_user(db,user:UserRegisterationSchema):
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
-    return {"message":"user registered successfully","data":new_user}
+    return new_user
 
 
 # put api Update user details
@@ -61,7 +61,7 @@ def delete_user_by_userid(data:DeleteUserSchemaByUserID,db):
     user.deleted_at = data.deleted_at
     db.commit()
     db.refresh(user)
-    return {"message":"user deleted successfully","data":user}
+    return user
 
 
 
