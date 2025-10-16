@@ -12,6 +12,11 @@ class UserBaseSchema(BaseModel):
 
 class UserRegisterationSchema(UserBaseSchema):
     hashed_password: str
+    class Config:
+        populate_by_name = True
+        orm_mode = True
+        from_attributes=True
+
 
 class UserLoginSchema(BaseModel):
     email: EmailStr
@@ -22,16 +27,19 @@ class UserUpdateSchema(UserBaseSchema):
     hashed_password: Optional[str]=None
 
 class UserResponseSchema(UserBaseSchema):
-    User_id:int
+    updated_at: Optional[datetime]=None
+    deleted_at: Optional[datetime]=None
+    user_id:int
     class Config:
-        orm_mode = True
+        from_attributes = True
+        populate_by_name = True
 
 class UserRequestSchemaByUserID(BaseModel):
     email: EmailStr
     password: str
 
 class DeleteUserSchemaByUserID(BaseModel):
-    User_id:int
+    user_id:int
     deleted_at: Optional[datetime]=None
     email: EmailStr
     password: str

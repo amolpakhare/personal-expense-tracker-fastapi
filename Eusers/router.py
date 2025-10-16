@@ -17,9 +17,9 @@ def register_user(user:UserRegisterationSchema,db:Session = Depends(get_db)):
 def update_user(user_email:str,user_password:str,update_details:UserUpdateSchema,db:Session = Depends(get_db)):
     return update_user_details(user_email,user_password,update_details,db) 
 
-@user_router.get("/login/{email}/{password}")
-def login_user(email:str,password:str,db:Session = Depends(get_db)):
-    return get_user_by_id(email,password,db)
+@user_router.post("/login")
+def login_user(user_data:UserRequestSchemaByUserID,db:Session = Depends(get_db)):
+    return get_user_by_id(user_data,db)
 
 @user_router.delete("/delete/user/{email}/{password}")
 def delete_user(data : DeleteUserSchemaByUserID,db:Session = Depends(get_db)):

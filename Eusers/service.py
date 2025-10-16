@@ -2,6 +2,7 @@ from Eusers.model import UserDB as user_db
 from database import Base
 from Eusers.schema import (UserRegisterationSchema, UserUpdateSchema,UserLoginSchema,DeleteUserSchemaByUserID,UserRequestSchemaByUserID)
 from fastapi import HTTPException, status
+from Eusers.transformer import *
 
 
 #post api User Regestration
@@ -43,13 +44,18 @@ def update_user_details(user_email:str,user_password:str,update_details:UserUpda
     return user
 
 # get api Get user details by user id
-def get_user_by_id(email:str,password:str,db):
-    user = db.query(user_db).filter(user_db.email==email,
-                                    user_db.hashed_password==password).first()
-    if not user:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail="User not found")
-    return user
+def get_user_by_id(user_data: UserRequestSchemaByUserID, db):
+    users = db.query(user_db).filter(
+        user_db.email == user_data.email,
+        user_db.hashed_password == user_data.password
+    ).all()
+
+    total = len(users)
+    if total == 0:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
+
+    return get_euser_data_transformer((users, total))
+    
 
 
 #put api Delete user details by user id
