@@ -1,4 +1,4 @@
-from Eusers.model import user_db
+from Eusers.model import UserDB as user_db
 from database import Base
 from Eusers.schema import (UserRegisterationSchema, UserUpdateSchema,UserLoginSchema,DeleteUserSchemaByUserID,UserRequestSchemaByUserID)
 from fastapi import HTTPException, status
